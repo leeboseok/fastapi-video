@@ -22,6 +22,7 @@ RUN git clone https://github.com/Wan-Video/Wan2.2.git /opt/Wan2.2 \
     && cd /opt/Wan2.2 \
     && pip install --no-cache-dir torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 \
        --index-url https://download.pytorch.org/whl/cu124 \
+    && sed -i '/flash_attn/d' requirements.txt \
     && pip install --no-cache-dir -r requirements.txt \
     && pip install --no-cache-dir -r requirements_s2v.txt \
     && pip install --no-cache-dir flash_attn --no-build-isolation
