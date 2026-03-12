@@ -6,7 +6,9 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # System dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN rm -rf /var/lib/apt/lists/* \
+    && apt-get clean \
+    && apt-get update && apt-get install -y --no-install-recommends \
     python3.10 python3-pip python3.10-dev python3.10-venv \
     ffmpeg git wget libgl1 libglib2.0-0 libsndfile1 \
     && ln -sf /usr/bin/python3.10 /usr/bin/python \
