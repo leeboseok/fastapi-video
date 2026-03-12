@@ -24,7 +24,7 @@ RUN git clone https://github.com/Wan-Video/Wan2.2.git /opt/Wan2.2 \
        --index-url https://download.pytorch.org/whl/cu124 \
     && pip install --no-cache-dir -r requirements.txt \
     && pip install --no-cache-dir -r requirements_s2v.txt \
-    && pip install --no-cache-dir flash_attn
+    && pip install --no-cache-dir flash_attn --no-build-isolation
 
 # Model download (~50GB)
 RUN pip install --no-cache-dir "huggingface_hub[cli]" \
