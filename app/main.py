@@ -4,14 +4,15 @@ import base64
 import shutil
 import subprocess
 import tempfile
+import logging
 
 from fastapi import FastAPI
 from fastapi.responses import Response
 from pydantic import BaseModel
-import logging
+from typing import Optional
 
 logger = logging.getLogger(__name__)
-from typing import Optional
+
 
 app = FastAPI(title="ARMS API")
 
