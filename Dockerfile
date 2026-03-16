@@ -27,14 +27,12 @@ RUN pip install --no-cache-dir "huggingface_hub[cli]" \
     && huggingface-cli download kresnik/wav2vec2-large-xlsr-korean \
        --local-dir /opt/models/wav2vec2-large-xlsr-korean
 
-# 오디오 인코더를 한국어 Wav2Vec2로 교체
 RUN sed -i "s|wav2vec2-large-xlsr-53-english|/opt/models/wav2vec2-large-xlsr-korean|g" \
     /opt/Wan2.2/wan/configs/wan_s2v_14B.py
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# App code
 COPY app/main.py .
 COPY app/resources/ /app/resources/
 COPY docker-entrypoint.sh .
