@@ -16,17 +16,15 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title="ARMS API")
 
-WAN_PATH = os.getenv("WAN_PATH", "/opt/Wan2.2")
-CKPT_DIR = os.getenv("CKPT_DIR", "/opt/models/Wan2.2-S2V-14B")
-DEFAULT_ANCHOR = os.getenv("DEFAULT_ANCHOR", "/app/resources/img.png")
-DEFAULT_SIZE = os.getenv("DEFAULT_SIZE", "1024*704")
-DEFAULT_PROMPT = os.getenv("DEFAULT_PROMPT", "A person is talking naturally with gentle expressions and subtle body movements.")
-INFERENCE_TIMEOUT = int(os.getenv("INFERENCE_TIMEOUT", "21600"))
+WAN_PATH = "/opt/Wan2.2"
+CKPT_DIR = "/opt/models/Wan2.2-S2V-14B"
+DEFAULT_ANCHOR = "/app/resources/img.png"
+DEFAULT_SIZE = "1024*704"
+INFERENCE_TIMEOUT = 36000
 
 
 class GenerateVideoRequest(BaseModel):
     audioData: str
-    prompt: Optional[str] = None
     size: Optional[str] = None
 
 
@@ -47,7 +45,6 @@ def generate_video(request: GenerateVideoRequest):
         f.write(audio_bytes)
 
     size = request.size or DEFAULT_SIZE
-    prompt = request.prompt or DEFAULT_PROMPT
     save_file = os.path.join(tmp_dir, "output.mp4")
 
     cmd = [
@@ -60,7 +57,6 @@ def generate_video(request: GenerateVideoRequest):
         "--convert_model_dtype",
         "--image", DEFAULT_ANCHOR,
         "--audio", wav_path,
-        "--prompt", prompt,
         "--save_file", save_file,
     ]
 
