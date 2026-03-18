@@ -19,7 +19,8 @@ RUN git clone https://github.com/Wan-Video/Wan2.2.git /opt/Wan2.2 \
     && sed -i '/flash_attn/d' requirements.txt \
     && pip install --no-cache-dir -r requirements.txt \
     && pip install --no-cache-dir -r requirements_s2v.txt \
-    && pip install --no-cache-dir flash_attn --no-build-isolation
+    && pip install --no-cache-dir flash_attn --no-build-isolation \
+    && pip install --no-cache-dir peft
 
 RUN pip install --no-cache-dir "huggingface_hub[cli]" \
     && huggingface-cli download Wan-AI/Wan2.2-S2V-14B \
