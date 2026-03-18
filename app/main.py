@@ -61,7 +61,11 @@ def generate_video(request: GenerateVideoRequest):
     ]
 
     process = subprocess.Popen(cmd, cwd=WAN_PATH, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    process.communicate(timeout=INFERENCE_TIMEOUT)
+    stdout, _ = process.communicate(timeout=INFERENCE_TIMEOUT)
+    logger.info("generate.py output:\n%s", stdout.decode(errors="replace"))
+    if process.returncode != 0:
+        shutil.rmtree(tmp_dir, ignore_errors=True)
+        return Response(content=f"generate.py failed (exit {process.returncode}):\n{stdout.decode(errors='replace')}", status_code=500)
 
     final_mp4 = os.path.join(tmp_dir, "final.mp4")
     subprocess.run(
