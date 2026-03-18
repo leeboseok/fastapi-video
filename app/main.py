@@ -11,6 +11,7 @@ from fastapi.responses import Response
 from pydantic import BaseModel
 from typing import Optional
 
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
