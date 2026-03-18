@@ -34,8 +34,9 @@ RUN sed -i "s|wav2vec2-large-xlsr-53-english|/opt/models/wav2vec2-large-xlsr-kor
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app/main.py .
-COPY app/resources/ /app/resources/
+COPY app/main.py /app/nfs/main.py
+COPY app/resources/ /app/nfs/resources/
+
 COPY docker-entrypoint.sh .
 RUN chmod +x /app/docker-entrypoint.sh
 

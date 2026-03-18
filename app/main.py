@@ -19,7 +19,7 @@ app = FastAPI(title="ARMS API")
 
 WAN_PATH = "/opt/Wan2.2"
 CKPT_DIR = "/opt/models/Wan2.2-S2V-14B"
-DEFAULT_ANCHOR = "/app/resources/img.png"
+DEFAULT_ANCHOR = "/app/nfs/resources/img.png"
 DEFAULT_SIZE = "1024*704"
 INFERENCE_TIMEOUT = 36000
 
